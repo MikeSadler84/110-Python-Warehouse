@@ -97,7 +97,7 @@ def stock_value():
     print("Total stock value")
     stock_value = 0.00
     for item in catalog:
-        stock_value += float(item.price) * item.stock
+        stock_value += item.price * float(item.stock)
         print("Your stock value is: $" + str(stock_value))
 
 
@@ -132,6 +132,29 @@ def delete_item():
                 catalog.pop(int(id) - 1)
             else:
                 print(item.title + " has not been deleted")
+    if(not found):
+        print("Error, invalid ID. Try again.")
+
+
+def display_categories():
+
+    print_header("Your Categories")
+    for item in catalog:
+        print(item.category)
+
+
+def update_stock():
+    print("Choose the item you wish to update")
+    display_catalog()
+    id = input("Choose the id you want to edit: ")
+    found = False
+    for item in catalog:
+        if(str(item.id) == id):
+            found = True
+            print("Updating " + item.title)
+            new_stock = input("Enter the new stock amount: ")
+            print("The new stock of " + item.title + " is " + new_stock)
+            item.stock = new_stock
     if(not found):
         print("Error, invalid ID. Try again.")
 
@@ -172,6 +195,15 @@ while(opc != "x"):
 
         delete_item()
         serialize_catalog()
+
+    elif(opc == "7"):
+
+        update_stock()
+        serialize_catalog()
+
+    elif(opc == "8"):
+
+        display_categories()
 
     input("Press enter to continue...")
 

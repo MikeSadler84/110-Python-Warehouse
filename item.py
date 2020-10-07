@@ -7,9 +7,9 @@ class Item:
     price = 0.0
 
     # always use self first, after that you can do it in any order
-    def __init__(self, id, title, cateogry, stock, price):
+    def __init__(self, id, title, category, stock, price):
         self.id = id
         self.title = title
-        self.category = cateogry
+        self.category = category
         self.stock = stock
         self.price = price
