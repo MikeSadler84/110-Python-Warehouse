@@ -15,12 +15,15 @@ Functionality:
 
 from menu import print_menu, clear, print_item, print_header
 from item import Item
+import logging
 import pickle  # serializer to store objects in files
 
 # global vars
 catalog = []
+change_log = []
 last_id = 1  # variable for starting ID
 data_file = "warehouse.data"
+
 # functions
 
 
@@ -97,7 +100,7 @@ def stock_value():
     print("Total stock value")
     stock_value = 0.00
     for item in catalog:
-        stock_value += item.price * float(item.stock)
+        stock_value += float(item.price) * float(item.stock)
         print("Your stock value is: $" + str(stock_value))
 
 
@@ -139,8 +142,12 @@ def delete_item():
 def display_categories():
 
     print_header("Your Categories")
+    # How to get unique categories so there are no duplicates
+    temp_list = []
     for item in catalog:
-        print(item.category)
+        if(item.category not in temp_list):
+            temp_list.append(item.category)
+            print(item.category)
 
 
 def update_stock():
@@ -159,8 +166,37 @@ def update_stock():
         print("Error, invalid ID. Try again.")
 
 
+def cheapest_item():
+    print_header("Cheapest Item")
+    temp_list = []
+    for item in catalog:
+        temp_list.append(item.price)
+        temp = sorted(temp_list)
+    for item in catalog:
+        if(item.price == temp[0]):
+            print_item(item)
+
+# def three_most_exp():
+#     print_header("Three Most Expensive Items")
+#     prices = []
+#     for item in catalog:
+#         prices.append(item.price)
+#     prices.sort(reverse=True)
+
+#     # print(prices[0])
+
+#     # print(prices[1])
+
+#     # print(prices[2])
+
+#     for item in catalog:
+#         if(item.price == prices[0] and item.price == prices[1] and item.price == prices[2]):
+#             print_item(item)
+
+
 # instructions
 deserialize_catalog()
+
 input("Press enter to continue...")
 
 opc = ""
@@ -205,7 +241,12 @@ while(opc != "x"):
 
         display_categories()
 
-    input("Press enter to continue...")
+    elif(opc == "9"):
 
+        cheapest_item()
 
-# var.ladjust(20) - Gives the variable 20 total characters including the amount of characters in the string
+    elif(opc == "10"):
+
+        # three_most_exp()
+
+        input("Press enter to continue...")

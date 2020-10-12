@@ -16,6 +16,8 @@ def print_menu():
     print("[6] Delete an item")  # similar to option 5
     print("[7] Update item stock")
     print("[8] Display categories")
+    print("[9] Cheapest product")
+    print("[10] Display the 3 most expensive items")
     print("[x] Close")
 
 
@@ -41,9 +43,9 @@ def now():
 
     now = datetime.datetime.now()
     print("-"*30)
-    print(" Current date and time: ")
+
     # %I = 12 hour time | %H = 24 hour time
-    print(now.strftime(" %Y-%m-%d %I:%M:%S"))
+    print(now.strftime(" %m-%d-%Y %I:%M:%S %p"))
 
 
 def print_header(title):
